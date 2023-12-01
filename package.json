@@ -12,7 +12,11 @@
     "form",
     "validator"
   ],
-  "author": "HUANG",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silence1996/validator.git"
+  },
+  "author": "GuangDa",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.23.5",
