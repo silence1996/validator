@@ -1,5 +1,5 @@
 {
-  "name": "@silence1996/validator",
+  "name": "q-validator",
   "version": "1.0.0",
   "description": "验证表单工具",
   "main": "dist/validator.cjs.js",
