@@ -1,6 +1,6 @@
 {
   "name": "q-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "验证表单工具",
   "main": "dist/validator.cjs.js",
   "module": "dist/validator.esm.js",
