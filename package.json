@@ -1,0 +1,23 @@
+{
+  "name": "validator",
+  "version": "1.0.0",
+  "description": "验证表单工具",
+  "main": "dist/validator.cjs.js",
+  "module": "dist/validator.esm.js",
+  "browser": "dist/validator.umd.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "form",
+    "validator"
+  ],
+  "author": "HUANG",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@rollup/plugin-babel": "^6.0.4",
+    "rollup": "^4.6.1"
+  }
+}
