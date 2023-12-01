@@ -184,12 +184,13 @@ export class Validator {
   /**
    * 验证表单
    * @param {Object} formData 表单数据
-   * @returns 错误信息 [{ key：表单key；val：表单的值；msg：错误信息；}]
+   * @param {Boolean} isReturnObj 是否返回对象形式的错误信息
+   * @returns 错误信息 [{ key：表单key；val：表单的值；msg：错误信息；}] || { key: { val, msg } }
    */
-  validate (formData = {}) {
+  validate (formData = {}, isReturnObj = false) {
     const { rules } = this
     
-    return Validator.validate(formData, rules)
+    return Validator.validate(formData, rules, isReturnObj)
   }
   
   /**
@@ -222,10 +223,21 @@ export class Validator {
    * 验证表单（静态方法）
    * @param {Object} formData 表单数据
    * @param {Object} rules 验证规则
-   * @returns 错误信息 [{ key：表单key；val：表单的值；msg：错误信息；}]
+   * @param {Boolean} isReturnObj 是否返回对象形式的错误信息
+   * @returns 错误信息 [{ key：表单key；val：表单的值；msg：错误信息；}] || { key: { val, msg } }
    */
-  static validate (formData = {}, rules = {}) {
-    const errors = []
+  static validate (formData = {}, rules = {}, isReturnObj = false) {
+    const errors = isReturnObj ? {} : []
+
+    const setErrors = (key, val, fn) => {
+      const msg = fn(val, key, formData)
+      if (!msg) return
+      if (isReturnObj) {
+        errors[key] = { msg, val }
+      } else {
+        errors.push({ msg, key, val })
+      }
+    }
     
     for (let key in rules) {
       if (!rules.hasOwnProperty(key)) continue
@@ -234,12 +246,10 @@ export class Validator {
 
       if (Array.isArray(item)) {
         for (let fun of item) {
-          const msg = fun(formData[key], key, formData)
-          if (msg) { errors.push({ msg, key, val: formData[key] }) }
+          setErrors(key, formData[key], fun)
         }
       } else if (typeof item === 'function') {
-        const msg = item(formData[key], key, formData)
-        if (msg) { errors.push({ msg, key, val: formData[key] }) }
+        setErrors(key, formData[key], item)
       }
     }
 

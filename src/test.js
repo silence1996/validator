@@ -70,4 +70,12 @@ btn.addEventListener('click', () => {
 
   console.log('ok', ok)
   console.log('okAll', okAll)
+
+  const obj = v.validate(errData, true)
+
+  const objok = v.validate(data, true)
+
+  console.log('obj', obj)
+
+  console.log('objok', objok)
 })
